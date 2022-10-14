@@ -2,7 +2,7 @@ import os
 from PIL import Image
 
 def findAllJpgFIles():
-    path = os.path.realpath('C:\Programowanie w Pythonie\AK_pon_11_20\JpgIntoPng')
+    path = os.path.realpath('C:\Users\zamoj\Desktop\python\PythonLabs')
     for root, d_names, f_names in os.walk(path):
         print(root, d_names, f_names)
         for i in f_names:
@@ -10,7 +10,7 @@ def findAllJpgFIles():
 
 
 def jpgToPdfConverter():
-    path = os.path.realpath('C:\Programowanie w Pythonie\AK_pon_11_20\JpgIntoPng')
+    path = os.path.realpath('C:\Users\zamoj\Desktop\python\PythonLabs')
     for root, d_names, f_names in os.walk(path):
         print(root, d_names, f_names)
         for i in f_names:
