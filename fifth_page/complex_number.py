@@ -15,8 +15,10 @@ class Complex:
     def __truediv__(self, o):
         m = o.r * o.r + o.i * o.i
         return Complex((self.r * o.r + self.i * o.i)/m, (self.i * o.r - self.r * o.i)/m)
+
     def modulus(self):
         return (pow(pow(self.r,2) + pow(self.i,2) , 1/2))
+        
     def __str__(self):
         if self.i == 0:
             return '%.2f' % self.r
