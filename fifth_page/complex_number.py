@@ -19,7 +19,7 @@ class Complex:
     def modulus(self):
         return (pow(pow(self.r,2) + pow(self.i,2) , 1/2))
         
-    def __str__(self):
+    def __output__(self):
         if self.i == 0:
             return '%.2f' % self.r
         if self.r == 0:
