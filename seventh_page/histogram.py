@@ -12,7 +12,7 @@ def countHistogram(data):
     return result
 
 
-def main():
+def compareThreads():
     pool = mp.Pool(mp.cpu_count())
     print(mp.cpu_count())
     data = a.tolist()
@@ -28,7 +28,7 @@ def main():
     print("Time single: " + str(time.time() - t))
 
 if __name__ == '__main__':
-    main()
+    compareThreads()
 
 #12
 #Time multicore: 0.09110021591186523
