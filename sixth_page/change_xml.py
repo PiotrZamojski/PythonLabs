@@ -1,8 +1,8 @@
 from importlib.resources import path
 import xml.etree.ElementTree as et
 
-pathIn = ".\\fifth_page\\old.xml"
-pathOut = ".\\fifth_page\\new.xml"
+pathIn = ".\\sixth_page\\old.xml"
+pathOut = ".\\sixth_page\\new.xml"
 tree = et.parse(pathIn)
 rootElement = tree.getroot()
 for element in rootElement.findall("food"):
