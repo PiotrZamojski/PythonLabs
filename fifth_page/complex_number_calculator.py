@@ -1,32 +1,7 @@
-def calculator():
-    numberEnterText = "Provide complex number or break with [c] \n"
-    operation = "Provide type in the math operation or break with [c] \n"
-    cancelButton = 'c'
-    inputFirstNumber = Complex(0,1)
-    inputSecondNumber = Complex(0,0)
-    while x != 'c':
-        inputFirstNumber.__inputNumber__()
-        if inputFirstNumber == cancelButton:
-            break
-        print(inputFirstNumber)
-        operationSign = input(operation)
-        if operationSign == cancelButton:
-            break
-        inputSecondNumber = input(numberEnterText)
-        if inputSecondNumber == cancelButton:
-            break
-    
-
-
 class Complex:
     def __init__(self, real, imag):
         self.r = real
         self.i = imag
-
-    def __inputNumber__(self):
-        self.rinput(self.r)
-        input(self.i)
-        return Complex(self.r, self.i)
 
     def __add__(self, o):
         return Complex(self.r + o.r, self.i + o.i)
@@ -55,10 +30,125 @@ class Complex:
             return '%.2f + %.2fi' % (self.r, self.i)
 
 
+def splitEquation(equation):
+    values = []
+    actualString = ""
+    for i in equation:
+        print(i)
+        if i == ")":
+            values.append(actualString)
+            actualString = ""
+        elif i == "(":
+            continue
+        else:
+            actualString += i
+    if actualString != "":
+        values.append(actualString)
+    print(values)
+    return values
+
+def simpleCalculator():
+    number = Complex(0, 0)
+    sign = ""
+    x = ""
+    while True:
+        print("Enter number or cancel(c): ")
+        x = input()
+        if x == "c":
+            break
+        complex = getComplexNumber(x)
+        if sign == "":
+            number =  complex
+        elif sign == "+":
+            number += complex
+            sign = ""
+        elif sign == "-":
+            number -= complex
+            sign = ""
+        elif sign == "*":
+            number *= complex
+
+            sign = ""
+        elif sign == "/":
+            try:
+                number /=complex
+            except ZeroDivisionError:
+                print("Cannot divide by 0")
+                return
+            sign = ""
+        print("Enter operation sign:")
+        sign = input()
+        if sign == "=":
+            break
+
+    if x == "c":
+        return
+
+    else:
+        print("Result: " + str(number))
+
+def getComplexNumber(text):
+    real = ""
+    img = ""
+    waitForImaginary = False
+    text = text.replace(" ","")
+
+    for i in text:
+        if i == "i":
+            break
+        if i == "+" or i == "-":
+            waitForImaginary = True
+        if (i != "+" or i != "-") and not waitForImaginary:
+            real = real+i
+        elif waitForImaginary:
+            img = img+i
+
+    if real == "+" or real == "-" or real == "*" or real == "/":
+        real = "0"
+        img = "0"
+
+    if ("i" in text) and img == "":
+        img = str(real)
+        real = "0"
+
+    elif img == "":
+        img = "0"
+    return Complex(int(real), int(img))
+
+def solve(equation):
+    splitted = []
+    values = splitEquation(equation)
+
+    for i in values:
+        splitted.append(str(i).split())
+    result = Complex(0, 0)
+    strongerSign = ""
+    for i in splitted:
+        localComplex = Complex(0, 0)
+        sign = ""
+        for j in i:
+            if j != "*" and j != "/" and j != "+" and j != "-":
+                if localComplex.real == 0 and localComplex.imag == 0:
+                    localComplex = getComplexNumber(j)
+                if sign == "+":
+                    localComplex.__add__(getComplexNumber(j))
+                    sign = ""
+                if sign == "-":
+                    localComplex.__sub__(getComplexNumber(j))
+                    sign = ""
+                if sign == "*":
+                    localComplex.__mul__(getComplexNumber(j))
+                    sign = ""
+                if sign == "/":
+                    try:
+                        localComplex.__div__(getComplexNumber(j))
+                    except ZeroDivisionError:
+                        print("Cannot divide by 0")
+                        return
+                    sign = ""
+            else:
+                sign = j
+    return result 
+
 if __name__ == '__main__':
-    x = Complex(2, 10)
-    y = Complex(3, 5)
-    calculator()
-    print(x.modulus())
-    print(y.modulus())
-   
+    simpleCalculator()
