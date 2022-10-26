@@ -3,16 +3,16 @@ class Complex:
         self.r = real
         self.i = imag
 
-    def add(self, o):
+    def __add__(self, o):
         return Complex(self.r + o.r, self.i + o.i)
 
-    def sub(self, o):
+    def __sub__(self, o):
         return Complex(self.r - o.r, self.i - o.i)
 
-    def mul(self, o):
+    def __mul__(self, o):
         return Complex(self.r * o.r - self.i * o.i, self.r * o.i + self.i * o.r)
 
-    def div(self, o):
+    def __truediv__(self, o):
         m = o.r * o.r + o.i * o.i
         return Complex((self.r * o.r + self.i * o.i)/m, (self.i * o.r - self.r * o.i)/m)
 
@@ -33,10 +33,10 @@ class Complex:
 if __name__ == '__main__':
     x = Complex(2, 10)
     y = Complex(3, 5)
-    print(x.add(y))
-    print(x.sub(y))
-    print(x.mul(y))
-    print(x.div(y))
+    print(x.__add__(y))
+    print(x.__sub__(y))
+    print(x.__mul__(y))
+    print(x.__truediv__(y))
     print(x.modulus())
     print(y.modulus())
    
