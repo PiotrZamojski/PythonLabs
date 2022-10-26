@@ -189,11 +189,5 @@ class TestComplexCalculator(unittest.TestCase):
         self.assertAlmostEquals(x,y)
 
 if __name__ == '__main__':
-    a = Complex(2, 5)
-    b = Complex(2, 5)
-    result = a.__add__(b)
-    test = Complex(4, 10)
-    if result != test:
-        print("PPPP")
     unittest.main()  
     #simpleCalculator()
